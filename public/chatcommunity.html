@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Community Chat</title>
+
+  <link rel="stylesheet" href="chatcommunity.css">
+
+</head>
+<body>
+
+
+<div class="chat-app">
+
+
+  <!-- LEFT -->
+  <div class="sidebar">
+
+    <h3 id="facultyTitle"></h3>
+
+    <input
+      type="text"
+      placeholder="Search group..."
+      id="searchBox"
+    >
+
+    <div id="groupList"></div>
+
+
+    <div class="sidebar-footer">
+
+      <button id="newGroupBtn">+ New Group</button>
+      <button id="backBtn">← Back</button>
+
+    </div>
+
+  </div>
+
+
+  <!-- RIGHT -->
+  <div class="chat-area">
+
+
+    <div class="chat-header" id="chatHeader">
+      Select Group
+    </div>
+
+
+    <div class="chat-body" id="chatBody"></div>
+
+
+    <div class="chat-input">
+
+      <input
+        type="text"
+        id="messageInput"
+        placeholder="Type message..."
+      >
+
+      <button id="sendBtn">Send</button>
+
+    </div>
+
+
+  </div>
+
+
+</div>
+
+
+<script src="chatcommunity.js"></script>
+
+</body>
+</html>

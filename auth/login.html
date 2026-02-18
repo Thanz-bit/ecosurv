@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | HTS</title>
+    <link rel="stylesheet" href="auth.css">
+</head>
+<body>
+
+<div class="auth-box">
+    <h2>Login</h2>
+
+    <input
+        type="email"
+        id="loginEmail"
+        placeholder="Enter your email"
+        required
+    >
+
+    <!-- CAPTCHA -->
+    <div class="captcha-box">
+        <canvas id="captcha" width="120" height="40"></canvas>
+        <button type="button" onclick="generateCaptcha()">↻</button>
+    </div>
+
+    <input
+        type="text"
+        id="captchaInput"
+        placeholder="Enter captcha"
+        required
+    >
+
+    <button onclick="login()">Login</button>
+
+    <p id="error" class="note"></p>
+</div>
+
+<script src="auth.js"></script>
+</body>
+</html>

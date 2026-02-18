@@ -1,0 +1,288 @@
+/* --- CSS VARIABLES & RESET --- */
+:root {
+    --primary: #FF4B65; /* Warna utama (Merah/Pink) */
+    --secondary: #2B3041; /* Warna teks gelap */
+    --accent: #3ECF8E; /* Warna hijau sukses */
+    --bg-light: #F9F9FB;
+    --white: #ffffff;
+    --shadow: 0 10px 30px rgba(0,0,0,0.08);
+    --radius: 12px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: var(--bg-light);
+    color: var(--secondary);
+    line-height: 1.6;
+}
+
+a { text-decoration: none; color: inherit; transition: 0.3s; }
+ul { list-style: none; }
+img { max-width: 100%; display: block; }
+
+/* --- NAVIGATION --- */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+    background: var(--white);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo-img {
+    width: 60px;   /* atur ukuran logo */
+    height: auto;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--secondary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.logo i { color: var(--primary); }
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+    font-weight: 500;
+}
+
+.nav-links a:hover { color: var(--primary); }
+
+.auth-buttons .btn {
+    padding: 10px 24px;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-login { background: transparent; color: var(--secondary); margin-right: 10px; }
+.btn-signup { background: var(--secondary); color: var(--white); border: none; }
+.btn-signup:hover { background: var(--primary); }
+
+/* --- HERO SECTION --- */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 80px 5%;
+    background: var(--white);
+}
+
+.hero-content { flex: 1; padding-right: 50px; }
+.hero-image { flex: 1; }
+
+h1 {
+    font-size: 48px;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+h1 span { color: var(--primary); }
+
+.hero p {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.search-bar {
+    background: var(--white);
+    padding: 10px;
+    border-radius: 50px;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    border: 1px solid #eee;
+    max-width: 500px;
+}
+
+.search-bar input {
+    border: none;
+    padding: 15px 20px;
+    flex: 1;
+    outline: none;
+    font-size: 16px;
+}
+
+.search-bar button {
+    background: var(--primary);
+    color: var(--white);
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.hero-image img {
+    border-radius: 20px 0 20px 0;
+    box-shadow: var(--shadow);
+}
+
+/* --- FILTERS & LISTING --- */
+.container {
+    padding: 60px 5%;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.filter-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 10px 25px;
+    border: 2px solid #ddd;
+    border-radius: 30px;
+    background: transparent;
+    cursor: pointer;
+    font-weight: 600;
+    color: #666;
+    transition: 0.3s;
+}
+
+.filter-btn.active, .filter-btn:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: rgba(255, 75, 101, 0.05);
+}
+
+.teacher-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+/* --- TEACHER CARD DESIGN --- */
+.teacher-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+    position: relative;
+}
+
+.teacher-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow);
+}
+
+.card-header {
+    height: 120px;
+    background: linear-gradient(135deg, #2B3041, #4a5066);
+    position: relative;
+}
+
+.card-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: var(--accent);
+    color: var(--white);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.teacher-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 4px solid var(--white);
+    object-fit: cover;
+    position: absolute;
+    bottom: -50px;
+    left: 20px;
+}
+
+.card-body {
+    padding: 60px 20px 20px 20px;
+}
+
+.teacher-name {
+    font-size: 18px;
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.flag { font-size: 20px; }
+
+.teacher-role {
+    color: #888;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.stats-row {
+    display: flex;
+    gap: 15px;
+    font-size: 13px;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.stat i { color: #f1c40f; margin-right: 5px; }
+
+.card-footer {
+    padding: 15px 20px;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.price {
+    font-weight: 700;
+    color: var(--secondary);
+    font-size: 18px;
+}
+.price span { font-size: 12px; font-weight: 400; color: #888; }
+
+.btn-book {
+    padding: 8px 20px;
+    background: var(--primary);
+    color: var(--white);
+    border-radius: 6px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-book:hover { background: #e03e56; }
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+    .hero { flex-direction: column-reverse; padding: 40px 5%; text-align: center; }
+    .hero-content { padding-right: 0; margin-top: 30px; }
+    .nav-links { display: none; }
+    .search-bar { margin: 0 auto; }
+    .teacher-img { left: 50%; transform: translateX(-50%); }
+    .card-body { text-align: center; }
+    .teacher-name { justify-content: center; gap: 10px; }
+    .stats-row { justify-content: center; }
+}

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LingoNow | Master Languages</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav>
+        <div class="logo">
+        <img src="last.png" alt="Logo" class="logo-img">
+        <span>HTS</span>
+    </div>
+
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="community.html">Community</a></li>
+            <li><a href="#">Consultant</a></li>
+            <li><a href="#">Friend</a></li>
+        </ul>
+        <div class="auth-buttons">
+            <button class="btn btn-login">Log In</button>
+            <button class="btn btn-signup">Sign Up</button>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Let's be Study Partners! <br><span>I’m looking for someone to trade knowledge with, not heartbeats.</span></h1>
+            <p>Choose from over 5000 people and offline teachers. and make a great points</p>
+            
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Lets Study Togther!">
+                <button onclick="filterTeachers()"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+            
+            <div style="margin-top: 20px; font-size: 14px; color: #777;">
+                <i class="fa-solid fa-check-circle" style="color: var(--accent);"></i> Verified Teachers &nbsp;
+                <i class="fa-solid fa-check-circle" style="color: var(--accent);"></i> Fight and Fun toghter
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="maskot.png" alt="Students learning">
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="section-header">
+            <h2>Find the perfect teacher for you</h2>
+            <p>Filter by major to see available experts.</p>
+        </div>
+
+        <div class="filter-buttons" id="filterContainer">
+            <button class="filter-btn active" onclick="filterByLang('all', this)">All</button>
+            <button class="filter-btn" onclick="filterByLang('English', this)">Computer Science</button>
+            <button class="filter-btn" onclick="filterByLang('Spanish', this)">Law</button>
+            <button class="filter-btn" onclick="filterByLang('French', this)">Industrial</button>
+            <button class="filter-btn" onclick="filterByLang('Japanese', this)">Management</button>
+        </div>
+
+        <div class="teacher-grid" id="teacherGrid">
+            </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
