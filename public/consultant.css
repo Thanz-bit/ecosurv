@@ -1,0 +1,119 @@
+* {
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  background: #f8f9fc;
+}
+
+/* LAYOUT UTAMA */
+.consultant-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 30px;
+  padding: 40px;
+}
+
+/* GRID KANAN */
+.consultant-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+/* CARD UMUM */
+.consultant-card {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  transition: 0.3s;
+  padding-bottom: 20px;
+}
+
+.consultant-card:hover {
+  transform: translateY(-5px);
+}
+
+/* HEADER GELAP (seperti foto kanan) */
+.consultant-card::before {
+  content: "";
+  display: block;
+  height: 90px;
+  background: linear-gradient(135deg, #2f3545, #3c4158);
+}
+
+/* FOTO */
+.consultant-card img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-top: -45px;
+  border: 4px solid #fff;
+}
+
+/* NAMA */
+.consultant-card h4,
+.consultant-card h3 {
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* ROLE */
+.consultant-card p {
+  font-size: 13px;
+  color: #777;
+  margin-top: 5px;
+  padding: 0 10px;
+}
+
+/* FLAG */
+.consultant-card span {
+  font-size: 14px;
+}
+
+/* CARD BESAR (KIRI) */
+.consultant-card.large {
+  max-width: 320px;
+  margin: auto;
+}
+
+.consultant-card.large::before {
+  height: 130px;
+}
+
+.consultant-card.large img {
+  width: 110px;
+  height: 110px;
+  margin-top: -55px;
+}
+
+.consultant-card.large h3 {
+  font-size: 18px;
+}
+
+/* MODE (ONLINE/OFFLINE) */
+.consultant-card small {
+  display: inline-block;
+  margin-top: 8px;
+  background: #ff5a5f;
+  color: #fff;
+  padding: 3px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .consultant-container {
+    grid-template-columns: 1fr;
+  }
+
+  .consultant-grid {
+    grid-template-columns: 1fr;
+  }
+}

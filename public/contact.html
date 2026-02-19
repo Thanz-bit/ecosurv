@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTS - Contact System</title>
+    <link rel="stylesheet" href="contact.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-left">
+            <img src="last.png" alt="Logo" class="nav-logo">
+            <span class="brand-name">HTS</span>
+        </div>
+        <div class="nav-center">
+            <a href="index.html">Home</a>
+            <a href="community.html">Community</a>
+            <a href="#">Consultant</a>
+            <a href="#">Contact</a>
+        </div>
+        <div class="nav-right">
+            <button class="btn-login">Log In</button>
+            <button class="btn-signup">Sign Up</button>
+        </div>
+    </nav>
+
+    <div class="app-container">
+        <aside class="sidebar-contacts">
+            <div class="sidebar-header">
+                <h2>Contacts</h2>
+                <input type="text" class="search-input" placeholder="Search friend...">
+            </div>
+
+            <div class="contact-list">
+                <div class="friend-label">Online — 14</div>
+                
+                <div class="user-row" onclick="openChat('???')">
+                    <div class="avatar-container">
+                        <img src="https://ui-avatars.com/api/?name=User&background=f0f0f0" alt="avatar">
+                        <span class="status-dot online"></span>
+                    </div>
+                    <div class="user-details">
+                        <div class="user-name">???</div>
+                        <div class="user-info">League of Legends</div>
+                    </div>
+                </div>
+
+                <div class="user-row" onclick="openChat('c4sure')">
+                    <div class="avatar-container">
+                        <img src="https://ui-avatars.com/api/?name=C4&background=f0f0f0" alt="avatar">
+                        <span class="status-dot online"></span>
+                    </div>
+                    <div class="user-details">
+                        <div class="user-name">c4sure</div>
+                        <div class="user-info">Online</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-footer">
+            </div>
+        </aside>
+
+        <main class="chat-main">
+            <div class="chat-header">
+                <h3 id="chat-title">Select a contact</h3>
+            </div>
+            <div class="chat-body" id="chat-display">
+                <div class="empty-state">
+                    <h1>HTS Messenger</h1>
+                    <p>Select a friend to start contact</p>
+                </div>
+            </div>
+            <div class="chat-footer">
+                <input type="text" id="msg-input" placeholder="Type message...">
+                <button id="send-btn">Send</button>
+            </div>
+        </main>
+    </div>
+
+    <script src="contact.js"></script>
+</body>
+</html>

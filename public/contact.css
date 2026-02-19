@@ -1,0 +1,126 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+:root {
+    --white: #ffffff;
+    --navbar-height: 70px;
+    --border: #f0f0f0;
+    --dark-blue: #2c333f; /* Warna tombol Sign Up */
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* --- STYLING NAVBAR (Foto Terbaru) --- */
+.navbar {
+    height: var(--navbar-height);
+    background: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    border-bottom: 1px solid var(--border);
+}
+
+.nav-left { display: flex; align-items: center; gap: 10px; }
+.nav-logo { width: 35px; height: 35px; border-radius: 5px; }
+.brand-name { font-weight: 800; font-size: 22px; color: var(--dark-blue); }
+
+.nav-center { display: flex; gap: 30px; }
+.nav-center a {
+    text-decoration: none;
+    color: #4a4a4a;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.nav-right { display: flex; align-items: center; gap: 20px; }
+.btn-login {
+    background: none;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    color: var(--dark-blue);
+}
+
+.btn-signup {
+    background: var(--dark-blue);
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* --- STYLING LAYOUT CHAT --- */
+.app-container {
+    display: flex;
+    flex: 1; /* Mengisi sisa layar di bawah navbar */
+    background: var(--white);
+}
+
+.sidebar-contacts {
+    width: 320px;
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: #f9f9f9;
+    margin: 15px 0;
+}
+
+.contact-list { flex: 1; overflow-y: auto; }
+
+.user-row {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: 0.2s;
+}
+
+.user-row:hover { background: #f5f5f5; }
+
+.avatar-container { position: relative; margin-right: 12px; }
+.avatar-container img { width: 40px; height: 40px; border-radius: 50%; }
+
+.status-dot {
+    width: 12px; height: 12px; border-radius: 50%;
+    position: absolute; bottom: 0; right: 0;
+    border: 2px solid white;
+}
+.status-dot.online { background: #23a55a; }
+
+.user-name { font-weight: 600; font-size: 14px; }
+.user-info { font-size: 12px; color: #888; }
+
+.btn-back {
+    width: 100%; padding: 10px; border: 1px solid var(--border);
+    background: #f9f9f9; border-radius: 8px; cursor: pointer;
+}
+
+/* Chat Area */
+.chat-main { flex: 1; display: flex; flex-direction: column; }
+.chat-header { padding: 20px; border-bottom: 1px solid var(--border); }
+.chat-body { flex: 1; display: flex; justify-content: center; align-items: center; color: #ccc; }
+
+.chat-footer { padding: 20px; display: flex; gap: 10px; border-top: 1px solid var(--border); }
+#msg-input { flex: 1; padding: 12px; border-radius: 8px; border: 1px solid var(--border); background: #f9f9f9; }
+#send-btn { background: #ff5c5c; color: white; border: none; padding: 0 20px; border-radius: 8px; cursor: pointer; }
