@@ -11,6 +11,32 @@
     
     <link rel="stylesheet" href="style.css">
 </head>
+    <script>
+    const authArea = document.getElementById("authArea");
+    const userEmail = localStorage.getItem("userEmail");
+
+    // 🔐 Protect page
+    if (!userEmail) {
+        window.location.href = "/login.html";
+    }
+
+    if (userEmail) {
+        authArea.innerHTML = `
+            <span style="margin-right:15px">${userEmail}</span>
+            <button class="btn btn-login" onclick="logout()">Logout</button>
+        `;
+    } else {
+        authArea.innerHTML = `
+            <button class="btn btn-login" onclick="location.href='auth/login.html'">Log In</button>
+            <button class="btn btn-signup" onclick="location.href='auth/register.html'">Sign Up</button>
+        `;
+    }
+
+    function logout() {
+        localStorage.removeItem("userEmail");
+        window.location.href = "/login.html";
+    }
+</script>
 <body>
 
     <nav>
