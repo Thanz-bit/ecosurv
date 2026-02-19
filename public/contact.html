@@ -4,26 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HTS - Contact System</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="navbar.css">
     <link rel="stylesheet" href="contact.css">
+    
 </head>
 <body>
 
-    <nav class="navbar">
-        <div class="nav-left">
-            <img src="last.png" alt="Logo" class="nav-logo">
-            <span class="brand-name">HTS</span>
-        </div>
-        <div class="nav-center">
-            <a href="index.html">Home</a>
-            <a href="community.html">Community</a>
-            <a href="#">Consultant</a>
-            <a href="#">Contact</a>
-        </div>
-        <div class="nav-right">
-            <button class="btn-login">Log In</button>
-            <button class="btn-signup">Sign Up</button>
-        </div>
-    </nav>
+    <nav>
+    <div class="logo">
+        <img src="last.png" alt="Logo" class="logo-img">
+        <span>HTS</span>
+    </div>
+
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="community.html">Community</a></li>
+        <li><a href="consultant.html">Consultant</a></li>
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
+
+    <div class="auth-buttons">
+        <button class="btn btn-login">Log In</button>
+        <button class="btn btn-signup">Sign Up</button>
+    </div>
+</nav>
 
     <div class="app-container">
         <aside class="sidebar-contacts">
