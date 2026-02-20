@@ -5,13 +5,32 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <title>Community Chat</title>
 
+  <link rel="stylesheet" href="navbar.css">
   <link rel="stylesheet" href="chatcommunity.css">
-
+  
 </head>
 <body>
+  <nav>
+    <div class="logo">
+        <img src="last.png" alt="Logo" class="logo-img">
+        <span>HTS</span>
+    </div>
 
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="community.html">Community</a></li>
+        <li><a href="Consultant.html">Consultant</a></li>
+        <li><a href="Contact.html">Contact</a></li>
+    </ul>
+
+    <div class="auth-buttons">
+        <button class="btn btn-login">Log In</button>
+        <button class="btn btn-signup">Sign Up</button>
+    </div>
+</nav>
 
 <div class="chat-app">
 
@@ -69,7 +88,19 @@
 
 
 </div>
+<!-- POPUP CREATE GROUP -->
+<div id="newGroupModal" class="modal">
+  <div class="modal-box">
+    <h3>Create New Group</h3>
 
+    <input type="text" id="newGroupInput" placeholder="Enter group name">
+
+    <div class="modal-buttons">
+      <button class="create-btn" onclick="createGroup()">Create</button>
+      <button class="cancel-btn" onclick="closeModal()">Cancel</button>
+    </div>
+  </div>
+</div>
 
 <script src="chatcommunity.js"></script>
 

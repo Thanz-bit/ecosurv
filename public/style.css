@@ -286,3 +286,72 @@ h1 span { color: var(--primary); }
     .teacher-name { justify-content: center; gap: 10px; }
     .stats-row { justify-content: center; }
 }
+
+/* PROFILE BUTTON (WHATSAPP STYLE) */
+.profile-wrapper {
+    position: relative;
+}
+
+.profile-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 14px;
+    border-radius: 50px;
+    border: 1px solid #ddd;
+    background: #F9F9F9;
+    cursor: pointer;
+}
+
+.profile-btn img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-name {
+    font-weight: 600;
+    color: #2B3041;
+    max-width: 120px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.profile-dropdown {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 180px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 100;
+}
+
+.profile-dropdown a {
+    padding: 14px 18px;
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+}
+
+.profile-dropdown a:hover {
+    background: #F5F5F5;
+}
+
+.profile-dropdown .logout {
+    color: #FF4B65;
+    font-weight: 600;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .profile-name {
+        display: none;
+    }
+}

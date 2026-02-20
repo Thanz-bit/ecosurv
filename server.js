@@ -58,7 +58,7 @@ app.post("/login", (req, res) => {
 // START SERVER
 // ===================
 app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "auth/login.html"));
+    res.sendFile(path.join(__dirname, "auth/register.html"));
 });
 
 app.get("/home", (req, res) => {

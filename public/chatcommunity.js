@@ -220,5 +220,27 @@ back.onclick = () => {
 };
 
 newGroup.onclick = () => {
-  alert("Coming soon 😄");
+  document.getElementById("newGroupModal").style.display = "flex";
 };
+function closeModal() {
+  document.getElementById("newGroupModal").style.display = "none";
+}
+
+function createGroup() {
+
+  const input = document.getElementById("newGroupInput");
+  const groupName = input.value.trim();
+
+  if(groupName === "") {
+    alert("Group name cannot be empty");
+    return;
+  }
+
+  groups.push(groupName);
+  localStorage.setItem("groups", JSON.stringify(groups));
+
+  renderGroups();
+
+  input.value = "";
+  closeModal();
+}
