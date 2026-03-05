@@ -9,19 +9,16 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
-    <link rel="stylesheet" href="/style.css">
+    
+    <link rel="stylesheet" href="style.css">
 </head>
-
-
-<body>
-
     <script>
     const authArea = document.getElementById("authArea");
     const userEmail = localStorage.getItem("userEmail");
 
     // 🔐 Protect page
     if (!userEmail) {
-        window.location.href = "../auth/login.html";
+        window.location.href = "/login.html";
     }
 
     if (userEmail) {
@@ -38,9 +35,11 @@
 
     function logout() {
         localStorage.removeItem("userEmail");
-        window.location.href = "../auth/login.html";
+        window.location.href = "/login.html";
     }
 </script>
+<body>
+
     <nav>
         <div class="logo">
         <img src="last.png" alt="Logo" class="logo-img">
@@ -48,13 +47,16 @@
     </div>
 
         <ul class="nav-links">
-            <li><a href="home.html">Home</a></li>
-            <li><a href="community.html">Community</a></li>
-            <li><a href="consultant.html">Consultant</a></li>
-            <li><a href="friend.html">Friend</a></li>
+            <!-- all of this must go to home.html -->
+            <li><a href="login.html">Home</a></li>
+            <li><a href="login.html">Community</a></li>
+            <li><a href="login.html">Consultant</a></li>
+            <li><a href="login.html">Contact</a></li>
         </ul>
-       <div class="auth-buttons" id="authArea"></div>
-
+        <div class="auth-buttons">
+            <button class="btn btn-login"><a href="login.html">Log In</a></button>
+            <button class="btn btn-signup"><a href="register.html">Sign Up</a></button>
+        </div>
     </nav>
 
     <section class="hero">
@@ -76,24 +78,6 @@
             <img src="maskot.png" alt="Students learning">
         </div>
     </section>
-
-    <div class="container">
-        <div class="section-header">
-            <h2>Find the perfect teacher for you</h2>
-            <p>Filter by major to see available experts.</p>
-        </div>
-
-        <div class="filter-buttons" id="filterContainer">
-            <button class="filter-btn active" onclick="filterByLang('all', this)">All</button>
-            <button class="filter-btn" onclick="filterByLang('English', this)">Computer Science</button>
-            <button class="filter-btn" onclick="filterByLang('Spanish', this)">Law</button>
-            <button class="filter-btn" onclick="filterByLang('French', this)">Industrial</button>
-            <button class="filter-btn" onclick="filterByLang('Japanese', this)">Management</button>
-        </div>
-
-        <div class="teacher-grid" id="teacherGrid">
-            </div>
-    </div>
 
     <script src="../script.js"></script>
 </body>

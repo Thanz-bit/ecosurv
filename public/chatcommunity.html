@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HTS Community</title>
 
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <title>Community Chat</title>
-
-  <link rel="stylesheet" href="navbar.css">
-  <link rel="stylesheet" href="chatcommunity.css">
-  
+   <link rel="stylesheet" href="navbar.css">
+  <link rel="stylesheet" href="chatcommunity.css" />
 </head>
 <body>
-  <nav>
+
+  <!-- ============================================================
+       VIEW: COMMUNITY (default visible)
+  ============================================================ -->
+  <div id="view-community" class="view active">
+    <!-- Navbar -->
+   <nav>
     <div class="logo">
         <img src="last.png" alt="Logo" class="logo-img">
         <span>HTS</span>
@@ -22,87 +26,231 @@
     <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="community.html">Community</a></li>
-        <li><a href="Consultant.html">Consultant</a></li>
-        <li><a href="Contact.html">Contact</a></li>
+        <li><a href="consultant.html">Consultant</a></li>
+        <li><a href="contact.html">Contact</a></li>
     </ul>
-
+<!-- 
     <div class="auth-buttons">
         <button class="btn btn-login">Log In</button>
         <button class="btn btn-signup">Sign Up</button>
-    </div>
+    </div> -->
 </nav>
 
-<div class="chat-app">
-
-
-  <!-- LEFT -->
-  <div class="sidebar">
-
-    <h3 id="facultyTitle"></h3>
-
-    <input
-      type="text"
-      placeholder="Search group..."
-      id="searchBox"
-    >
-
-    <div id="groupList"></div>
-
-
-    <div class="sidebar-footer">
-
-      <button id="newGroupBtn">+ New Group</button>
-      <button id="backBtn">← Back</button>
-
-    </div>
-
-  </div>
-
-
-  <!-- RIGHT -->
-  <div class="chat-area">
-
-
-    <div class="chat-header" id="chatHeader">
-      Select Group
-    </div>
-
-
-    <div class="chat-body" id="chatBody"></div>
-
-
-    <div class="chat-input">
-
-      <input
-        type="text"
-        id="messageInput"
-        placeholder="Type message..."
-      >
-
-      <button id="sendBtn">Send</button>
-
-    </div>
-
-
-  </div>
-
-
-</div>
-<!-- POPUP CREATE GROUP -->
-<div id="newGroupModal" class="modal">
-  <div class="modal-box">
-    <h3>Create New Group</h3>
-
-    <input type="text" id="newGroupInput" placeholder="Enter group name">
-
-    <div class="modal-buttons">
-      <button class="create-btn" onclick="createGroup()">Create</button>
-      <button class="cancel-btn" onclick="closeModal()">Cancel</button>
+    <!-- Content -->
+    <div class="community-content">
+      <div class="community-header">
+        <h1>Faculty of Computing</h1>
+        <p>Join or create a study group with your fellow students</p>
+      </div>
+      <div class="community-toolbar">
+        <input id="search-input" type="text" placeholder="🔍  Search groups..." class="search-input" oninput="filterGroups(this.value)" />
+        <button class="btn-primary" onclick="openCreateModal()">+ Create Group</button>
+      </div>
+      <div id="groups-grid" class="groups-grid">
+        <!-- Cards injected by JS -->
+      </div>
     </div>
   </div>
-</div>
 
-<script src="chatcommunity.js"></script>
+  <!-- ============================================================
+       VIEW: JOIN GROUP
+  ============================================================ -->
+  <div id="view-join" class="view">
+    <div class="join-wrapper">
+      <div class="join-card">
+        <div id="join-icon" class="join-icon"></div>
+        <h2 id="join-name"></h2>
+        <p id="join-meta" class="join-meta"></p>
+        <div class="join-info">
+          <div>💬 Text channels for discussions</div>
+          <div>🔊 Voice rooms for live sessions</div>
+          <div>🎓 Academic community group</div>
+        </div>
+        <div class="join-actions">
+          <button class="btn-outline" onclick="switchView('community')">← Back</button>
+          <button class="btn-primary" onclick="confirmJoin()">Join Group 🎉</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
+  <!-- ============================================================
+       VIEW: DISCORD (Group Chat)
+  ============================================================ -->
+  <div id="view-discord" class="view">
+    <div class="discord-layout">
+
+      <!-- Left Sidebar: Channels -->
+      <aside class="channel-sidebar">
+        <!-- Server header -->
+        <div class="server-header">
+          <div id="server-icon" class="server-icon-sm"></div>
+          <div class="server-info">
+            <div id="server-name" class="server-name"></div>
+            <div class="server-status">● Active</div>
+          </div>
+          <button class="icon-btn" onclick="switchView('community')" title="Back">🏠</button>
+        </div>
+
+        <!-- Channel list -->
+        <div id="channel-list" class="channel-list">
+          <!-- Injected by JS -->
+        </div>
+
+        <!-- Add Category -->
+        <div class="add-cat-wrap">
+          <button class="btn-dashed" onclick="openAddCatModal()">+ Add Category</button>
+        </div>
+
+        <!-- You Panel -->
+        <div class="you-panel">
+          <div class="you-avatar-wrap">
+            <div class="you-avatar">Y</div>
+            <div class="you-status-dot"></div>
+          </div>
+          <div class="you-info">
+            <div class="you-name">You</div>
+            <div id="you-status" class="you-substatus">Online</div>
+          </div>
+          <div class="you-controls">
+            <button id="btn-mic" class="ctrl-btn active" onclick="toggleMic()" title="Mute/Unmute">🎙️</button>
+            <button id="btn-sound" class="ctrl-btn active" onclick="toggleSound()" title="Deafen">🔊</button>
+            <button class="ctrl-btn active" title="Settings">⚙️</button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Chat Area -->
+      <main class="chat-main">
+        <!-- Channel header -->
+        <div class="chat-header">
+          <span id="chat-ch-icon" class="ch-icon"></span>
+          <span id="chat-ch-name" class="ch-name"></span>
+          <span id="voice-badge" class="voice-badge hidden">Connected</span>
+        </div>
+
+        <!-- Text channel messages -->
+        <div id="text-area" class="text-area">
+          <div id="messages-list" class="messages-list">
+            <!-- Messages injected by JS -->
+          </div>
+          <div id="msg-end"></div>
+        </div>
+
+        <!-- Voice channel area -->
+        <div id="voice-area" class="voice-area hidden">
+          <div id="voice-room-icon" class="voice-room-icon"></div>
+          <div id="voice-room-name" class="voice-room-name"></div>
+          <div class="voice-room-label">Voice Room</div>
+          <div id="voice-members" class="voice-members"></div>
+          <button id="btn-join-voice" class="btn-join-voice" onclick="toggleJoinVoice()">🟢 Join Voice</button>
+        </div>
+
+        <!-- Text input bar -->
+        <div id="chat-input-bar" class="chat-input-bar">
+          <div class="input-row">
+            <span class="input-emoji">😊</span>
+            <input id="msg-input" type="text" placeholder="Message #channel" class="msg-input" onkeydown="handleMsgKey(event)" />
+            <span class="input-attach">📎</span>
+            <span class="input-img">🖼️</span>
+            <button class="btn-send" onclick="sendMessage()">Send</button>
+          </div>
+        </div>
+      </main>
+
+      <!-- Right Sidebar: Members -->
+      <aside class="members-sidebar">
+        <div class="members-header">Members</div>
+
+        <!-- Online -->
+        <div class="member-section-label">ONLINE</div>
+        <div id="members-online" class="members-list"></div>
+
+        <!-- Offline -->
+        <div class="member-section-label">OFFLINE</div>
+        <div id="members-offline" class="members-list"></div>
+
+        <!-- Friends -->
+        <div class="member-section-label" style="margin-top:16px">FRIENDS</div>
+        <div id="friends-list" class="members-list"></div>
+        <button class="btn-add-friend" onclick="openAddFriendModal()">+ Add Friend</button>
+      </aside>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       MODALS
+  ============================================================ -->
+
+  <!-- Create Group Modal -->
+  <div id="modal-create" class="modal-overlay hidden">
+    <div class="modal-box">
+      <h3 class="modal-title">Create New Group</h3>
+      <p class="modal-sub">Set up your community space</p>
+      <label class="modal-label">ICON</label>
+      <div id="icon-picker" class="icon-picker">
+        <!-- Injected by JS -->
+      </div>
+      <label class="modal-label">GROUP NAME</label>
+      <input id="new-group-name" type="text" placeholder="e.g. Data Science Club" class="modal-input" />
+      <label class="modal-label">DESCRIPTION (optional)</label>
+      <input id="new-group-desc" type="text" placeholder="What's this group about?" class="modal-input" />
+      <div class="modal-actions">
+        <button class="btn-outline" onclick="closeModal('modal-create')">Cancel</button>
+        <button class="btn-primary" onclick="createGroup()">Create 🚀</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Channel Modal -->
+  <div id="modal-add-ch" class="modal-overlay hidden">
+    <div class="modal-box">
+      <h3 class="modal-title">Create Channel</h3>
+      <p id="add-ch-in" class="modal-sub"></p>
+      <label class="modal-label">TYPE</label>
+      <div class="type-picker">
+        <div id="type-text" class="type-opt active" onclick="selectChType('text')">💬 Text</div>
+        <div id="type-voice" class="type-opt" onclick="selectChType('voice')">🔊 Voice</div>
+      </div>
+      <label class="modal-label">NAME</label>
+      <input id="new-ch-name" type="text" placeholder="channel-name" class="modal-input" onkeydown="if(event.key==='Enter')addChannel()" />
+      <div class="modal-actions">
+        <button class="btn-outline" onclick="closeModal('modal-add-ch')">Cancel</button>
+        <button class="btn-primary" onclick="addChannel()">Create</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Category Modal -->
+  <div id="modal-add-cat" class="modal-overlay hidden">
+    <div class="modal-box">
+      <h3 class="modal-title">Add Category</h3>
+      <label class="modal-label">NAME</label>
+      <input id="new-cat-name" type="text" placeholder="e.g. Resources" class="modal-input" onkeydown="if(event.key==='Enter')addCategory()" />
+      <div class="modal-actions">
+        <button class="btn-outline" onclick="closeModal('modal-add-cat')">Cancel</button>
+        <button class="btn-primary" onclick="addCategory()">Create</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Friend Modal -->
+  <div id="modal-add-friend" class="modal-overlay hidden">
+    <div class="modal-box">
+      <h3 class="modal-title">Add Friend</h3>
+      <p class="modal-sub">Enter a username to send a friend request</p>
+      <label class="modal-label">USERNAME</label>
+      <input id="friend-username" type="text" placeholder="e.g. Rizky" class="modal-input" onkeydown="if(event.key==='Enter')addFriend()" />
+      <div class="modal-actions">
+        <button class="btn-outline" onclick="closeModal('modal-add-friend')">Cancel</button>
+        <button class="btn-primary" onclick="addFriend()">Send Request</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast notification -->
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="chatcommunity.js"></script>
 </body>
 </html>

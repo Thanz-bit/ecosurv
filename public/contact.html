@@ -1,91 +1,246 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTS - Contact System</title>
-
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="navbar.css">
-    <link rel="stylesheet" href="contact.css">
-    
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTS — Community Chat</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="contact.css">
 </head>
 <body>
 
-    <nav>
-    <div class="logo">
-        <img src="last.png" alt="Logo" class="logo-img">
-        <span>HTS</span>
-    </div>
-
-    <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="community.html">Community</a></li>
-        <li><a href="consultant.html">Consultant</a></li>
-        <li><a href="contact.html">Contact</a></li>
-    </ul>
-
-    <div class="auth-buttons">
-        <button class="btn btn-login">Log In</button>
-        <button class="btn btn-signup">Sign Up</button>
-    </div>
+<!-- NAV -->
+<nav>
+  <div class="logo">
+    <img src="last.png" alt="HTS" class="logo-img" onerror="this.style.display='none';document.getElementById('logo-fallback').style.display='flex'">
+    <div class="logo-icon" id="logo-fallback" style="display:none">HTS</div>
+    <span>HTS</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="community.css">Community</a></li>
+    <li><a href="consultant.html">Consultant</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+  <!-- <div class="nav-actions">
+    <button class="btn btn-outline">Log In</button>
+    <button class="btn btn-solid">Sign Up</button>
+  </div> -->
 </nav>
 
-    <div class="app-container">
-        <aside class="sidebar-contacts">
-            <div class="sidebar-header">
-                <h2>Contacts</h2>
-                <input type="text" class="search-input" placeholder="Search friend...">
-            </div>
+<div class="app">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-tabs">
+      <div class="stab active" id="tab-friends" onclick="switchTab('friends')">Friends</div>
+      <div class="stab" id="tab-requests" onclick="switchTab('requests')">Requests <span class="badge" id="req-badge">2</span></div>
+    </div>
+    <div class="sidebar-search"><input type="text" id="search-input" placeholder="Search..."></div>
+    <div class="section-label" id="section-label">Online — <span id="online-count">3</span></div>
+    <div class="contacts-list" id="contacts-list"></div>
+  </aside>
 
-            <div class="contact-list">
-                <div class="friend-label">Online — 14</div>
-                
-                <div class="user-row" onclick="openChat('???')">
-                    <div class="avatar-container">
-                        <img src="https://ui-avatars.com/api/?name=User&background=f0f0f0" alt="avatar">
-                        <span class="status-dot online"></span>
-                    </div>
-                    <div class="user-details">
-                        <div class="user-name">???</div>
-                        <div class="user-info">League of Legends</div>
-                    </div>
-                </div>
+  <div class="main">
+    <!-- CHAT COL -->
+    <div class="chat-col">
 
-                <div class="user-row" onclick="openChat('c4sure')">
-                    <div class="avatar-container">
-                        <img src="https://ui-avatars.com/api/?name=C4&background=f0f0f0" alt="avatar">
-                        <span class="status-dot online"></span>
-                    </div>
-                    <div class="user-details">
-                        <div class="user-name">c4sure</div>
-                        <div class="user-info">Online</div>
-                    </div>
-                </div>
-            </div>
+      <!-- Topbar -->
+      <div class="chat-topbar" id="chat-topbar" style="display:none">
+        <span class="topbar-at">@</span>
+        <span class="topbar-name" id="topbar-name"></span>
+        <div class="topbar-actions">
+          <button class="topbar-btn" onclick="startCall('audio')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.08 10.8a19.79 19.79 0 01-3.07-8.63A2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.36 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.06 6.06l1.27-.51a2 2 0 012.11.45c.907.34 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            <span class="tooltip">Voice Call</span>
+          </button>
+          <button class="topbar-btn" onclick="startCall('video')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+            <span class="tooltip">Video Call</span>
+          </button>
+          <button class="topbar-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"/><path d="M5 17h14v-1.76a2 2 0 00-1.11-1.79l-1.78-.9A2 2 0 0115 10.76V6h1a2 2 0 000-4H8a2 2 0 000 4h1v4.76a2 2 0 01-1.11 1.79l-1.78.9A2 2 0 005 15.24z"/></svg>
+            <span class="tooltip">Pinned</span>
+          </button>
+          <button class="topbar-btn" onclick="openAddFriend()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+            <span class="tooltip">Add Friend</span>
+          </button>
+          <button class="topbar-btn" id="toggle-profile-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <span class="tooltip">Profile</span>
+          </button>
+          <div class="topbar-search">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <span id="search-ph">Search</span>
+          </div>
+        </div>
+      </div>
 
-            <div class="sidebar-footer">
-            </div>
-        </aside>
+      <!-- Messages -->
+      <div class="messages-wrap" id="messages-wrap">
+        <div class="empty-state" id="empty-state">
+          <div class="icon">💬</div>
+          <p>Select a friend to start chatting</p>
+        </div>
+      </div>
 
-        <main class="chat-main">
-            <div class="chat-header">
-                <h3 id="chat-title">Select a contact</h3>
-            </div>
-            <div class="chat-body" id="chat-display">
-                <div class="empty-state">
-                    <h1>HTS Messenger</h1>
-                    <p>Select a friend to start contact</p>
-                </div>
-            </div>
-            <div class="chat-footer">
-                <input type="text" id="msg-input" placeholder="Type message...">
-                <button id="send-btn">Send</button>
-            </div>
-        </main>
+      <!-- Typing -->
+      <div class="typing-bar" id="typing-bar" style="visibility:hidden">
+        <div class="dot-anim"><span></span><span></span><span></span></div>
+        <span id="typing-lbl">Someone</span> is typing...
+      </div>
+
+      <input type="file" id="photo-input" accept="image/*" style="display:none" multiple>
+      <div id="img-preview-bar" style="display:none; padding:8px 16px 0; gap:8px; flex-wrap:wrap; flex-shrink:0;"></div>
+
+      <!-- Input Bar -->
+      <div class="input-bar" id="input-bar" style="display:none">
+        <div class="ib-actions">
+          <button class="ib-btn" id="btn-attach" title="Attach Photo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+          </button>
+        </div>
+        <input type="text" id="msg-input" placeholder="Type a message...">
+        <div class="ib-actions">
+          <button class="ib-btn" id="btn-gift" title="Gift">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><path d="M12 22V7m0 0a4 4 0 100-8 4 4 0 000 8z"/></svg>
+          </button>
+          <button class="ib-btn" id="btn-gif" title="GIF">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M10 9H8v6h2m0-3H8m8-3v6m-4 0V9h4"/></svg>
+          </button>
+          <button class="ib-btn" id="btn-sticker" title="Stickers">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 0110 10c0 5.52-4.48 10-10 10A10 10 0 012 12 10 10 0 0112 2z"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/></svg>
+          </button>
+          <button class="ib-btn" id="btn-emoji" title="Emoji">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 13s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+          </button>
+        </div>
+        <button class="send-btn" id="send-btn">
+          <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+      </div>
+
+      <!-- Pickers -->
+      <div class="emoji-picker" id="emoji-picker">
+        <div class="ep-tabs">
+          <button class="ep-tab active" onclick="switchEpCat(this,'smileys')">😀</button>
+          <button class="ep-tab" onclick="switchEpCat(this,'gestures')">👋</button>
+          <button class="ep-tab" onclick="switchEpCat(this,'hearts')">❤️</button>
+          <button class="ep-tab" onclick="switchEpCat(this,'animals')">🐶</button>
+          <button class="ep-tab" onclick="switchEpCat(this,'food')">🍕</button>
+          <button class="ep-tab" onclick="switchEpCat(this,'activities')">⚽</button>
+          <button class="ep-tab" onclick="switchEpCat(this,'travel')">✈️</button>
+          <button class="ep-tab" onclick="switchEpCat(this,'objects')">💡</button>
+          <button class="ep-tab" onclick="switchEpCat(this,'symbols')">🔥</button>
+        </div>
+        <div class="ep-search"><input type="text" id="ep-search" placeholder="Search emoji..."></div>
+        <div class="ep-grid" id="ep-grid"></div>
+      </div>
+      <div class="gif-picker" id="gif-picker">
+        <div class="gif-search"><input type="text" id="gif-search" placeholder="Search GIFs..." oninput="filterGifs(this.value)"></div>
+        <div class="gif-grid" id="gif-grid"></div>
+      </div>
+      <div class="sticker-picker" id="sticker-picker">
+        <div class="sticker-tabs" id="sticker-tabs">
+          <button class="sticker-tab active" onclick="switchStickerPack(this,'gaming')">🎮 Gaming</button>
+          <button class="sticker-tab" onclick="switchStickerPack(this,'emotions')">😭 Emotions</button>
+          <button class="sticker-tab" onclick="switchStickerPack(this,'animals')">🐱 Animals</button>
+          <button class="sticker-tab" onclick="switchStickerPack(this,'food')">🍔 Food</button>
+        </div>
+        <div class="sticker-grid" id="sticker-grid"></div>
+      </div>
+      <div class="gift-picker" id="gift-picker">
+        <div class="gift-header">🎁 Send a Gift</div>
+        <div class="gift-grid" id="gift-grid"></div>
+      </div>
+
+    </div><!-- /chat-col -->
+
+    <!-- PROFILE PANEL -->
+    <div class="profile-panel" id="profile-panel" style="display:none">
+      <div class="p-banner" id="p-banner"></div>
+      <div class="p-av-wrap"><div class="p-av" id="p-av">?<span class="p-online-dot"></span></div></div>
+      <div class="p-name-block">
+        <div class="p-name" id="p-name"></div>
+        <div class="p-handle" id="p-handle"></div>
+      </div>
+      <div class="p-actions" id="p-actions"></div>
+      <div class="p-card">
+        <div class="p-label">Bio</div><div class="p-val" id="p-bio"></div>
+        <div class="p-label">Member Since</div><div class="p-val" id="p-since"></div>
+      </div>
+      <div class="p-div"></div>
+      <div class="p-row" onclick="openViewProfile()"><span>Mutual Groups — <span id="p-servers">0</span></span><span class="p-chev">›</span></div>
+      <div class="p-row"><span>Mutual Friends — <span id="p-friends">0</span></span><span class="p-chev">›</span></div>
+      <div class="p-footer" onclick="openViewProfile()">View Full Profile</div>
     </div>
 
-    <script src="contact.js"></script>
+  </div><!-- /main -->
+</div><!-- /app -->
+
+<!-- TOAST -->
+<div class="toast-wrap" id="toast-wrap"></div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     VIEW FULL PROFILE MODAL
+═══════════════════════════════════════════════════════════ -->
+<div class="vp-overlay" id="vp-overlay" style="display:none" onclick="closeViewProfile(event)">
+  <div class="vp-box">
+    <div class="vp-banner" id="vp-banner">
+      <button class="vp-close" onclick="closeViewProfile()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+
+    <div class="vp-av-wrap">
+      <div class="vp-av" id="vp-av"></div>
+      <div class="vp-online-dot" id="vp-online-dot"></div>
+    </div>
+
+    <div class="vp-body">
+      <div class="vp-header-row">
+        <div>
+          <div class="vp-name" id="vp-name"></div>
+          <div class="vp-handle-txt" id="vp-handle-txt"></div>
+        </div>
+        <div class="vp-status-pill" id="vp-status-pill">🟢 Online</div>
+      </div>
+
+      <div class="vp-section">
+        <div class="vp-section-label">ABOUT ME</div>
+        <div class="vp-section-val" id="vp-bio"></div>
+      </div>
+
+      <div class="vp-grid">
+        <div class="vp-stat">
+          <div class="vp-stat-num" id="vp-groups-num">0</div>
+          <div class="vp-stat-lbl">Mutual Groups</div>
+        </div>
+        <div class="vp-stat">
+          <div class="vp-stat-num" id="vp-friends-num">0</div>
+          <div class="vp-stat-lbl">Mutual Friends</div>
+        </div>
+        <div class="vp-stat">
+          <div class="vp-stat-num" id="vp-since-num"></div>
+          <div class="vp-stat-lbl">Member Since</div>
+        </div>
+      </div>
+
+      <div class="vp-section">
+        <div class="vp-section-label">MUTUAL GROUPS</div>
+        <div id="vp-groups-list"></div>
+      </div>
+
+      <div class="vp-section">
+        <div class="vp-section-label">CURRENTLY</div>
+        <div class="vp-section-val" id="vp-activity"></div>
+      </div>
+
+      <div class="vp-btn-row" id="vp-btn-row"></div>
+    </div>
+  </div>
+</div>
+
+<script src="contact.js"></script>
 </body>
 </html>

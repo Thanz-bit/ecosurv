@@ -75,7 +75,7 @@ function login() {
     .then(data => {
         if (data.success) {
             localStorage.setItem("userEmail", email);
-            window.location.href = "/home.html";
+            window.location.href = "/index.html";
         } else {
             alert(data.message);
             generateCaptcha();
